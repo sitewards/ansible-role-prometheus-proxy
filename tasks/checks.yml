@@ -9,6 +9,6 @@
     hour: "*"
     day: "*"
     month: "*"
-    job: "systemd-cat {{ item.job }}; echo \"{{ item.code }} $?\" > /var/metrics/prometheus/{{ item.code }}.prom"
+    job: "systemd-cat {{ item.job }}; echo \"{{ item.code }} $?\" > {{ nginx_prometheus_proxy_textfile_collection_dir }}/{{ item.code }}.prom"
     disabled: "{{ item.disabled | default(false) }}"
   with_items: "{{ nginx_prometheus_proxy_checks }}"
