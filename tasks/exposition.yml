@@ -1,0 +1,21 @@
+---
+## Debguging
+- name: "Show me teh ip addresses"
+  debug:
+    var: ansible_all_ipv4_addresses
+
+- name: "Create the .htaccess file"
+  htpasswd:
+    path: "{{ nginx_prometheus_proxy_htaccess_path }}"
+    name: "{{ item.user }}"
+    password: "{{ item.password }}"
+  with_items: "{{ nginx_prometheus_proxy_users }}"
+
+# Exposes the exporters via the webserver, in a password protected way.
+- name: "Create the vhosts"
+  template:
+    src: "etc/nginx/sites-enabled/template.conf"
+    dest: "/etc/nginx/sites-enabled/{{ item.name }}.conf"
+  with_items: "{{ nginx_prometheus_proxy_exporters }}"
+  ## This comes from the upstream geerlingguy.nginx task
+  notify: "reload nginx"

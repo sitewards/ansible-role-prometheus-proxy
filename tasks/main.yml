@@ -1,0 +1,7 @@
+---
+## Provides the additional configuration required to expose the metrics to the required consumers, as well as do any
+## additional setup for the stack.
+- include: "dependencies.yml"
+- include: "node-exporter.yml"
+- include: "exposition.yml"
+- include: "checks.yml"

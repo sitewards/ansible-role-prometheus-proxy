@@ -1,0 +1,14 @@
+---
+# Some scheduled checks that operate on this machine. Relies on the exit code of the check to express numeric
+# state.
+- name: "Ensure the cron tasks are in the expected state"
+  cron:
+    name: "{{ item.name }}"
+    user: "{{ item.user }}"
+    minute: "*"
+    hour: "*"
+    day: "*"
+    month: "*"
+    job: "systemd-cat {{ item.job }}; echo \"{{ item.code }} $?\" > /var/metrics/prometheus/{{ item.code }}.prom"
+    disabled: "{{ item.disabled | default(false) }}"
+  with_items: "{{ nginx_prometheus_proxy_checks }}"

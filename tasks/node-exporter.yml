@@ -1,0 +1,10 @@
+---
+# This is a trivial role to create the required directories so that the machine can be later instrumented.
+- name: "Create the textfile collection dir"
+  file:
+    path: "{{ nginx_prometheus_proxy_textfile_collection_dir }}"
+    owner: "root"
+    group: "root"
+    # The permissions are so liberal so that any user can write metrics into this dir.
+    mode: "0777"
+    state: "directory"
