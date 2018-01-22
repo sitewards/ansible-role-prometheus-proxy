@@ -1,7 +1,4 @@
 ---
-## The location on disk that the text file results should exist
-nginx_prometheus_proxy_textfile_collection_dir: "/var/metrics/prometheus"
-
 ## The addresses of the exporters, such that they can be reversed proxied by the webserver
 nginx_prometheus_proxy_exporters: []
 ## The name of the exporter.
@@ -16,21 +13,7 @@ nginx_prometheus_proxy_users: []
 
 nginx_prometheus_proxy_htaccess_path: "/etc/nginx/nginx_prometheus_proxy.htaccess"
 
-## Some scheduled checks to perform on the machine. Generally, these should be avoided, and instead expressed through
-## a daemon.
-nginx_prometheus_proxy_checks:
-  - code: "node_reboot_required"
-    name: "Expresses whether the machine has recently updated critical services, and must thusly be updated."
-    user: "root"
-    minute: "*"
-    hour: "*"
-    day: "*"
-    month: "*"
-    # The exit code expresses whether this needs changing. If the file exists, it is 1. If not, it is 0.
-    # This can then be picked up by the alert manager and Jira.
-    job: "[ ! -f /var/run/reboot-required ]"
-
 ## A server name which will be used in the nginx configuration,
-## please be adviced that by default we use "_" and that is a dirty trick to achieve catch-all behavior,
+## please be advised that by default we use "_" and that is a dirty trick to achieve catch-all behavior,
 ## see http://nginx.org/en/docs/http/server_names.html 
 nginx_prometheus_proxy_server_name: "_"
