@@ -1,6 +1,5 @@
 ---
-dependencies:
-  - "geerlingguy.nginx"
+dependencies: []
 
 galaxy_info:
   author: "sitewards"
