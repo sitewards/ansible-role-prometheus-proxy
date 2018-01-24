@@ -17,3 +17,8 @@ nginx_prometheus_proxy_htaccess_path: "/etc/nginx/nginx_prometheus_proxy.htacces
 ## please be advised that by default we use "_" and that is a dirty trick to achieve catch-all behavior,
 ## see http://nginx.org/en/docs/http/server_names.html 
 nginx_prometheus_proxy_server_name: "_"
+
+## If TLS should be enabled for the connection, enable it by supplying an appropriate TLS certificate and key
+## (Optional)
+# nginx_prometheus_tls_certificate_path: ""
+# nginx_prometheus_tls_certificate_key_path: ""
