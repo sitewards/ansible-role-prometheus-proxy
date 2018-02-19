@@ -1,8 +1,8 @@
 # Ansible Prometheus exposition role
 
-This is the Ansible Prometheus NGINX exposition role. It's designed for consumption by playbooks, not for consumption by
-itself. It adds additional configuration that allows the exporters to be exposed on a public interface with the NGINX
-webserver
+This is the Ansible Prometheus reverse proxy exposition role. It's designed for consumption by playbooks, not for
+consumption by itself. It adds additional configuration that allows the exporters to be exposed on a public interface
+with the nginx or apache webservers
 
 ## Justification
 
@@ -17,6 +17,23 @@ data prevents unauthorized access.
 ## Requirements
 
 - Internet Access
+
+### Integrations
+
+This has been tested with the following additional roles:
+
+- geerlingguy.nginx
+- geerlingguy.apache
+
+It is not guaranteed to work with anything else.
+
+### Apache
+
+The module requires the following extensions to be enabled:
+
+- proxy
+- proxy_http
+- proxy_http2
 
 ## Warnings
 
@@ -34,9 +51,9 @@ There are two ways to install this role:
 ```bash
 $ cd path/to/playbook/root
 $ cat >> requirements.yaml <<EOF
-- src: "https://github.com/sitewards/ansible-role-nginx-prometheus-proxy"
+- src: "https://github.com/sitewards/ansible-role-prometheus-proxy"
   version: "master" # <----- Update this to a stable version
-  name: "sitewards.nginx-prometheus-proxy"
+  name: "sitewards.prometheus-proxy"
 EOF
 $ ansible-galaxy install -r requirements.yaml
 ```
@@ -46,7 +63,7 @@ $ ansible-galaxy install -r requirements.yaml
 ```
 $ cd path/to/playbook/root
 $ mkdir roles/
-$ git submodule add https://github.com/sitewards/ansible-role-nginx-prometheus-proxy.git  roles/sitewards.nginx-prometheus-proxy
+$ git submodule add https://github.com/sitewards/ansible-role-prometheus-proxy.git  roles/sitewards.prometheus-proxy
 ```
 
 ## Usage
@@ -69,7 +86,7 @@ Add the reference for the role:
 # ...
 become_user: "root"
 roles
-  - "sitewards.nginx-prometheus-proxy"
+  - "sitewards.prometheus-proxy"
 ```
 
 This should work!

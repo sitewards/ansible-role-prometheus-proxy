@@ -1,0 +1,9 @@
+---
+# Exposes the exporters via the webserver, in a password protected way.
+- name: "Create the vhosts"
+  template:
+    src: "etc/apache2/sites-enabled/template.conf"
+    dest: "/etc/apache2/sites-enabled/{{ item.name }}.conf"
+  with_items: "{{ prometheus_proxy_exporters }}"
+  ## This comes from the upstream geerlingguy.apache task
+  notify: "restart apache"

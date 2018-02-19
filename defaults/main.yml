@@ -1,24 +1,34 @@
 ---
+## The webserver that will expose the metrics. Currently supported:
+##  - NGINX
+##  - Apache
+## (Required)
+# prometheus_proxy_webserver:
+
 ## The addresses of the exporters, such that they can be reversed proxied by the webserver
-nginx_prometheus_proxy_exporters: []
+prometheus_proxy_exporters: []
 ## The name of the exporter.
 # - name: "node-exporter"
 ## The port the exporter operators on
 #   port: 9100
 
 ## A series of usernames and passwords that will be used by the webserver as basic auth
-nginx_prometheus_proxy_users: []
+prometheus_proxy_users: []
 # - user: "monitoring"
 #   password: "testpassword"
 
-nginx_prometheus_proxy_htaccess_path: "/etc/nginx/nginx_prometheus_proxy.htaccess"
+## The path to the password file for the proxy
+prometheus_proxy_htaccess_path: "/etc/prometheus_proxy/prometheus-proxy.htaccess"
 
-## A server name which will be used in the nginx configuration,
-## please be advised that by default we use "_" and that is a dirty trick to achieve catch-all behavior,
-## see http://nginx.org/en/docs/http/server_names.html 
-nginx_prometheus_proxy_server_name: "_"
+## The user/group that should own the file
+prometheus_proxy_htaccess_owner: "www-data"
+prometheus_proxy_htaccess_group: "www-data"
 
 ## If TLS should be enabled for the connection, enable it by supplying an appropriate TLS certificate and key
 ## (Optional)
 # nginx_prometheus_tls_certificate_path: ""
 # nginx_prometheus_tls_certificate_key_path: ""
+
+## The prompt that basic authentication will supply
+## (Required)
+prometheus_proxy_authentication_prompt: "Please supply a valid username / password"
