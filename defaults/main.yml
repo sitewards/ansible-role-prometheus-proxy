@@ -11,6 +11,8 @@ prometheus_proxy_exporters: []
 # - name: "node-exporter"
 ## The port the exporter operators on
 #   port: 9100
+## The public port that should be used facing the internet
+#   port_public: 9101
 
 ## A series of usernames and passwords that will be used by the webserver as basic auth
 prometheus_proxy_users: []
