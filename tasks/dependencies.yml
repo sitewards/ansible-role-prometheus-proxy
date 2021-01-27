@@ -3,13 +3,13 @@
   package:
     name: "python3-pip"
     state: "present"
-  when: "ansible_python_version | version_compare('3.0.0', '>=')"
+  when: "ansible_python_version is version_compare('3.0.0', '>=')"
 
 - name: "Install pip to manage python packages"
   package:
     name: "python-pip"
     state: "present"
-  when: "ansible_python_version | version_compare('3.0.0', '<=')"
+  when: "ansible_python_version is version_compare('3.0.0', '<=')"
 
 - name: "Install the passlib python library"
   pip:
